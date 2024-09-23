@@ -14,6 +14,13 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'POST',
   CURLOPT_POSTFIELDS =>'{
+
+    "filter": {
+        "property": "Web",
+        "checkbox": {
+        "equals": true
+        }
+    },
     
     "sorts": [
         {
@@ -21,6 +28,7 @@ curl_setopt_array($curl, array(
         "direction": "ascending"
         }
     ]
+  
 }',
   CURLOPT_HTTPHEADER => array(
     'Authorization: Bearer secret_M0mZfsEal1vLmwfCGJJbgPKsBp7SRnKjMEonmtQMbAx',
@@ -29,11 +37,35 @@ curl_setopt_array($curl, array(
     'Cookie: __cf_bm=XQoB9e6v9LOgbHdUqiSyiFQ8dJnajmaPtwdGoUBCvCI-1726570270-1.0.1.1-Kyx0IIjmfHB7s9rXqgxdGphb1.ihMIt_H.mhpFXTQfAoVCr7a9YDHVpYmO0Q5CZs9om4oBoHluKWd2uiiRn2PA; _cfuvid=EwDrCJMEX8IAV6mnl042Nt4MOMIhgTjz.sXUR_neUhg-1726570270922-0.0.1.1-604800000'
   ),
 ));
-
 $response = curl_exec($curl);
 
 curl_close($curl);
-echo $response;
+// he solicitado una refactorizacion a chatgpt
+$respuesta = json_decode($response, true);
+
+// Comenzamos la lista de cursos
+$listacurso = '<ul>';
+
+// Iteramos por los resultados
+foreach ($respuesta['results'] as $valor) {
+    // Accedemos directamente a la propiedad "Name" del objeto "properties"
+    $nombrePropiedad = $valor['properties']['Name'];
+
+    // Verificamos si tiene títulos para procesar
+    if (isset($nombrePropiedad['title'])) {
+        // Concatenamos los títulos como un ítem de la lista
+        foreach ($nombrePropiedad['title'] as $titulo) {
+            $listacurso .= '<li>' . $titulo['plain_text'] . '</li>';
+        }
+    }
+}
+
+// Cerramos la lista
+$listacurso .= '</ul>';
+
+// Mostramos la lista generada
+echo $listacurso;
+
 
 
 ?>

@@ -23,7 +23,7 @@ curl_setopt_array($curl, array(
     ]
 }',
   CURLOPT_HTTPHEADER => array(
-    'Authorization: Bearer *************',
+    'Authorization: Bearer secret_M0mZfsEal1vLmwfCGJJbgPKsBp7SRnKjMEonmtQMbAx',
     'Content-Type: application/json',
     'Notion-Version: 2022-02-22',
     'Cookie: __cf_bm=XQoB9e6v9LOgbHdUqiSyiFQ8dJnajmaPtwdGoUBCvCI-1726570270-1.0.1.1-Kyx0IIjmfHB7s9rXqgxdGphb1.ihMIt_H.mhpFXTQfAoVCr7a9YDHVpYmO0Q5CZs9om4oBoHluKWd2uiiRn2PA; _cfuvid=EwDrCJMEX8IAV6mnl042Nt4MOMIhgTjz.sXUR_neUhg-1726570270922-0.0.1.1-604800000'
